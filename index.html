@@ -1,9 +1,12 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-7590801576628940"
-     crossorigin="anonymous"></script>
-  
+  <!-- Google AdSense — Add in <head> -->
+<script async
+  src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-XXXXXXXXXXXXXXXX"
+  crossorigin="anonymous">
+</script>
+
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>ResumeAI Pro – Build ATS-Friendly Resumes with AI</title>
@@ -665,11 +668,11 @@
   <!-- Progress Bar -->
   <div class="progress-bar-wrap">
     <div class="progress-steps">
-      <div class="ps active" data-step="1"><span>1</span> Personal</div>
-      <div class="ps" data-step="2"><span>2</span> Experience</div>
-      <div class="ps" data-step="3"><span>3</span> Education</div>
-      <div class="ps" data-step="4"><span>4</span> Skills</div>
-      <div class="ps" data-step="5"><span>5</span> Extras</div>
+      <div class="ps active" data-step="1" onclick="nextStep(1)"><span>1</span> Personal</div>
+      <div class="ps" data-step="2" onclick="nextStep(2)"><span>2</span> Experience</div>
+      <div class="ps" data-step="3" onclick="nextStep(3)"><span>3</span> Education</div>
+      <div class="ps" data-step="4" onclick="nextStep(4)"><span>4</span> Skills</div>
+      <div class="ps" data-step="5" onclick="nextStep(5)"><span>5</span> Extras</div>
     </div>
     <div class="progress-track">
       <div class="progress-fill" id="progressFill" style="width:20%"></div>
@@ -853,10 +856,6 @@
         <div class="step-header"><i class="fa fa-graduation-cap"></i> Education</div>
         <div id="edu-list"></div>
         <button class="btn-add" onclick="addEducation()"><i class="fa fa-plus"></i> Add Education</button>
-        <div class="step-actions">
-          <button class="btn-back" onclick="nextStep(2)"><i class="fa fa-arrow-left"></i> Back</button>
-          <button class="btn-next" onclick="nextStep(4)">Next: Skills <i class="fa fa-arrow-right"></i></button>
-        </div>
         <div class="field full">
   <label>
     <i class="fa fa-link"
@@ -866,10 +865,9 @@
   </label>
   <div style="position:relative">
     <input type="url"
+      id="marksheet-link"
       placeholder="https://drive.google.com/file/d/..."
-      oninput="liveUpdate()"
-      data-edu="${id}"
-      data-f="drivelink"
+      oninput="updatePreview()"
       style="padding-right:90px"/>
     <button type="button"
       onclick="testDriveLink(this)"
@@ -891,6 +889,10 @@
     Copy link → Paste here
   </div>
 </div>
+        <div class="step-actions">
+          <button class="btn-back" onclick="nextStep(2)"><i class="fa fa-arrow-left"></i> Back</button>
+          <button class="btn-next" onclick="nextStep(4)">Next: Skills <i class="fa fa-arrow-right"></i></button>
+        </div>
       </div>
 
       <!-- STEP 4: Skills -->
@@ -921,10 +923,6 @@
           <input type="text" id="languages" placeholder="English (Fluent), Hindi (Native), French (Basic)" oninput="updatePreview()" />
         </div>
         <button class="ai-btn" onclick="aiGenerate('skills')"><i class="fa fa-robot"></i> AI Suggest Skills</button>
-        <div class="step-actions">
-          <button class="btn-back" onclick="nextStep(3)"><i class="fa fa-arrow-left"></i> Back</button>
-          <button class="btn-next" onclick="nextStep(5)">Next: Extras <i class="fa fa-arrow-right"></i></button>
-        </div>
         <div class="keyword-suggester" id="keywordSuggester">
   <div class="ks-header">
     <div class="ks-title">
@@ -989,7 +987,12 @@
     <div id="ksResultContent"></div>
   </div>
 </div>
- 
+        <div class="step-actions">
+          <button class="btn-back" onclick="nextStep(3)"><i class="fa fa-arrow-left"></i> Back</button>
+          <button class="btn-next" onclick="nextStep(5)">Next: Extras <i class="fa fa-arrow-right"></i></button>
+        </div>
+      </div>
+
       <!-- STEP 5: Extras -->
       <div class="step" id="step-5">
         <div class="step-header"><i class="fa fa-star"></i> Achievements, Projects & Certificates</div>
