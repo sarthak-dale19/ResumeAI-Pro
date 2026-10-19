@@ -411,6 +411,20 @@ function nextStep(n) {
   document.getElementById('builder').scrollIntoView({ behavior: 'smooth', block: 'start' });
 }
 
+function liveUpdate() {
+  if (typeof updatePreview === 'function') updatePreview();
+}
+window.liveUpdate = liveUpdate;
+
+document.addEventListener('DOMContentLoaded', () => {
+  document.querySelectorAll('.ps').forEach(ps => {
+    ps.addEventListener('click', () => {
+      const step = parseInt(ps.dataset.step, 10);
+      if (step) nextStep(step);
+    });
+  });
+});
+
 function scrollToBuilder() {
   document.getElementById('builder').scrollIntoView({ behavior: 'smooth' });
 }
